@@ -22,3 +22,6 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
+var porta = process.env.PORT || 8080;
+app.listen(porta);
+
