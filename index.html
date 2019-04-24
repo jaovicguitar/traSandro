@@ -28,6 +28,10 @@
 		  padding: 0 0 20px 0;
 		}
 
+		.picture-canvas {
+		  display: none;
+		}
+
 		video {
 		  vertical-align: top;
 		  --width: 25vw;
@@ -42,6 +46,7 @@
 		video#gumVideo {
 		  margin: 0 20px 20px 0;
 		}
+
     </style>
 	
 	<meta charset="utf-8">
@@ -60,38 +65,37 @@
     <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../../../css/main.css">
     <link rel="stylesheet" href="/css/main.css">
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+	
+	
   </head>
   <body>
-    
-	<div id="map" style="width: 100%; height: 400px"></div>
+	<div id="container">
 
-    <script
-        src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-    </script>
+    <video id="gum" playsinline autoplay muted></video>
+    <video id="recorded" playsinline loop></video>
 
-    <script>
-		let latitude;
-		let longitude;
-	
-		navigator.geolocation.getCurrentPosition(function(posicao) {
-			latitude = posicao.coords.latitude;
-			longitude = posicao.coords.longitude; 
-			
-			console.log(latitude, longitude);
-			
-			var map = L.map('map').setView([latitude, longitude], 17);
-			mapLink = 
-            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-			L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18,
-            }).addTo(map);
-			
-			L.marker([latitude, longitude]).addTo(map);
-		});
-    </script>
+    <div>
+        <button id="start">Iniciar Câmera</button>
+        <button id="record" disabled>Iniciar Gravação</button>
+        <button id="play" disabled>Reproduzir</button>
+        <button id="download" disabled>Download</button>
+    </div>
+
+    <div>
+        <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
+    </div>
+
+    <div>
+        <span id="errorMsg"></span>
+    </div>
+    <script src="js/main.js" async></script>
+
+</div>
 	
 	<ul id="mensagens"></ul>
     <form action="">
